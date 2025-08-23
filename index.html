@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxe Interiors - Transform Your Space</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: #2d2d2d;
+            overflow-x: hidden;
+            background: #f9f6f2; /* Beige/cream background */
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: transparent;
+            z-index: 1000;
+            padding: 1.8rem 0;
+            transition: all 0.4s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(30, 30, 30, 0.85);
+            padding: 1.2rem 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 3rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #f7cac9; /* Rose gold */
+            text-decoration: none;
+            letter-spacing: 1.5px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #f4f0e8; /* Cream */
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #f7cac9; /* Rose gold */
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -8px;
+            left: 0;
+            background: linear-gradient(90deg, #f7cac9, #f3a7a4);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 35px;
+            height: 4px;
+            background: #f4f0e8;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(45, 45, 45, 0.7), rgba(247, 202, 201, 0.5)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%232d2d2d"/><stop offset="100%" style="stop-color:%23f7cac9"/></linearGradient></defs><rect width="1200" height="800" fill="url(%23g1)"/><path d="M0 0L400 400L800 0L1200 400L800 800L400 400Z" fill="%23f4f0e8" opacity="0.2"/><circle cx="600" cy="400" r="200" fill="%23f3a7a4" opacity="0.3"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #f4f0e8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(247, 202, 201, 0.2), rgba(243, 167, 164, 0.2));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .hero:hover .hero-overlay {
+            opacity: 1;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            padding: 0 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(50px);
+            line-height: 1.2;
+            color: #f4f0e8;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(50px);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .btn {
+            padding: 16px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(247, 202, 201, 0.2), rgba(243, 167, 164, 0.2));
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #f7cac9, #f3a7a4);
+            color: #2d2d2d;
+            border: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #f4f0e8;
+            border: 2px solid #f4f0e8;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(247, 202, 201, 0.5);
+        }
+
+        .btn-secondary:hover {
+            background: #f4f0e8;
+            color: #2d2d2d;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            background: rgba(247, 202, 201, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 10px rgba(247, 202, 201, 0.3);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 150px 0;
+            background: #fff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #2d2d2d;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #f7cac9, #f3a7a4);
+        }
+
+        .section-title p {
+            font-size: 1.4rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 3rem;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(247, 202, 201, 0.2);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #f7cac9, #f3a7a4);
+            transition: left 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            left: 0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #f7cac9, #f3a7a4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.15);
+            box-shadow: 0 8px 16px rgba(247, 202, 201, 0.4);
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            margin-bottom: 1.5rem;
+            color: #2d2d2d;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 150px 0;
+            background: linear-gradient(180deg, #f9f6f2, #f4f0e8);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            margin-top: 100px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            height: 360px;
+            border-radius: 25px;
+            overflow: hidden;
+            cursor: pointer;
+            background: linear-gradient(45deg, #f4f0e8, #f9f6f2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .portfolio-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(247, 202, 201, 0.9), rgba(243, 167, 164, 0.9));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .portfolio-item:hover::before {
+            opacity: 1;
+        }
+
+        .portfolio-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 3rem;
+            color: #f4f0e8;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-content {
+            transform: translateY(0);
+        }
+
+        .portfolio-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .portfolio-content p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 150px 0;
+            background: linear-gradient(135deg, #2d2d2d, #3a3a3a);
+            color: #f4f0e8;
+        }
+
+        .testimonial-slider {
+            position: relative;
+            max-width: 1000px;
+            margin: 100px auto 0;
+        }
+
+        .testimonial {
+            text-align: center;
+            padding: 3rem;
+            display: none;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial.active {
+            display: block;
+        }
+
+        .testimonial p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            font-style: italic;
+            margin-bottom: 2.5rem;
+            line-height: 2;
+        }
+
+        .testimonial-author {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #f7cac9;
+            font-size: 1.2rem;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .slider-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: rgba(244, 240, 232, 0.3);
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .slider-dot:hover {
+            transform: scale(1.2);
+        }
+
+        .slider-dot.active {
+            background: #f7cac9;
+            transform: scale(1.2);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 150px 0;
+            background: #fff;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            margin-top: 100px;
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2d2d2d;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #f7cac9, #f3a7a4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            margin-right: 2rem;
+            font-size: 1.4rem;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: rotate(360deg);
+        }
+
+        .contact-form {
+            background: #f9f6f2;
+            padding: 3.5rem;
+            border-radius: 25px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #2d2d2d;
+            font-size: 1.1rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #f4f0e8;
+            border-radius: 12px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            background: #fff;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #f7cac9;
+            box-shadow: 0 0 10px rgba(247, 202, 201, 0.4);
+        }
+
+        .form-group textarea {
+            height: 160px;
+            resize: vertical;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f7cac9, #f3a7a4);
+            color: #2d2d2d;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 3.5rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .stat-item p {
+            font-size: 1.4rem;
+            font-weight: 300;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #2d2d2d, #3a3a3a);
+            color: #f4f0e8;
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 2rem;
+            color: #f7cac9;
+            font-size: 2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 2.2;
+            font-weight: 300;
+            font-size: 1rem;
+        }
+
+        .footer-section a:hover {
+            color: #f7cac9;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: #3a3a3a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #f7cac9;
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 30px;
+            margin-top: 30px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(30, 30, 30, 0.95);
+                flex-direction: column;
+                padding: 2rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                padding: 0.8rem 0;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero p {
+                font-size: 1.3rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                padding: 14px 35px;
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.8rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #2d2d2d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            text-align: center;
+            color: #f4f0e8;
+        }
+
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 6px solid #f9f6f2;
+            border-top: 6px solid #f7cac9;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 30px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Designing Your Future...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Luxe Interiors</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Elevate Your Space with Artistry</h1>
+            <p>Crafting luxurious, functional interiors that reflect your unique style and vision.</p>
+            <div class="cta-buttons">
+                <a href="#portfolio" class="btn btn-primary">Discover Our Work</a>
+                <a href="#contact" class="btn btn-secondary">Begin Your Journey</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 class="counter" data-count="500">0</h3>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="counter" data-count="15">0</h3>
+                    <p>Years of Expertise</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="counter" data-count="98">0</h3>
+                    <p>Client Satisfaction</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="counter" data-count="25">0</h3>
+                    <p>Design Awards</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Signature Services</h2>
+                <p>From vision to victory, we deliver bespoke interior solutions tailored to your dreams.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>Residential Design</h3>
+                    <p>Create your dream home with bespoke designs for luxury apartments and grand estates.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏢</div>
+                    <h3>Commercial Spaces</h3>
+                    <p>Design inspiring workspaces that boost productivity and embody your brand’s essence.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛋️</div>
+                    <h3>Furniture & Decor</h3>
+                    <p>Curate exquisite furniture and decor to elevate your space’s style and comfort.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💡</div>
+                    <h3>Lighting Design</h3>
+                    <p>Enhance ambiance with tailored lighting solutions for beauty and functionality.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Color Consultation</h3>
+                    <p>Find the perfect palette to reflect your style and set the mood for every room.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📐</div>
+                    <h3>Space Planning</h3>
+                    <p>Optimize your space with strategic layouts for flow, function, and elegance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Masterpieces</h2>
+                <p>Discover our portfolio of innovative designs showcasing creativity and excellence.</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" onclick="openPortfolio('Modern Penthouse')">
+                    <div class="portfolio-content">
+                        <h3>Modern Penthouse</h3>
+                        <p>Luxury residential design with panoramic city views.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" onclick="openPortfolio('Corporate Headquarters')">
+                    <div class="portfolio-content">
+                        <h3>Corporate Headquarters</h3>
+                        <p>Modern office space fostering collaboration and innovation.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" onclick="openPortfolio('Boutique Hotel')">
+                    <div class="portfolio-content">
+                        <h3>Boutique Hotel</h3>
+                        <p>Elegant hospitality design infused with local culture.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" onclick="openPortfolio('Restaurant & Bar')">
+                    <div class="portfolio-content">
+                        <h3>Restaurant & Bar</h3>
+                        <p>Immersive dining experience with bespoke lighting.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" onclick="openPortfolio('Luxury Villa')">
+                    <div class="portfolio-content">
+                        <h3>Luxury Villa</h3>
+                        <p>Mediterranean-inspired family residence.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" onclick="openPortfolio('Retail Showroom')">
+                    <div class="portfolio-content">
+                        <h3>Retail Showroom</h3>
+                        <p>Brand-centric retail space for optimal product display.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: #f4f0e8;">Client Stories</h2>
+                <p style="color: #ccc;">Hear from our delighted clients about their transformative experiences.</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial active">
+                    <p>"Luxe Interiors turned our office into a masterpiece. Their creativity and precision inspire our team daily."</p>
+                    <div class="testimonial-author">- Sarah Johnson, CEO TechCorp</div>
+                </div>
+                <div class="testimonial">
+                    <p>"From vision to reality, Luxe Interiors delivered our dream home with unmatched professionalism."</p>
+                    <div class="testimonial-author">- Michael & Lisa Chen, Homeowners</div>
+                </div>
+                <div class="testimonial">
+                    <p>"Their innovative restaurant design elevated our dining experience, delighting our customers."</p>
+                    <div class="testimonial-author">- Giovanni Romano, Restaurant Owner</div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <div class="slider-dot active" onclick="currentTestimonial(1)"></div>
+                <div class="slider-dot" onclick="currentTestimonial(2)"></div>
+                <div class="slider-dot" onclick="currentTestimonial(3)"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Begin Your Transformation</h2>
+                <p>Ready to redefine your space? Connect with our expert design team today.</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Connect With Us</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <strong>Address</strong><br>
+                            123 Design District, Creative City<br>
+                            State 12345
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <strong>Phone</strong><br>
+                            +1 (555) 123-4567
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <strong>Email</strong><br>
+                            hello@luxeinteriors.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">⏰</div>
+                        <div>
+                            <strong>Business Hours</strong><br>
+                            Mon-Fri: 9:00 AM - 6:00 PM
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Interested In</label>
+                            <select id="service" name="service">
+                                <option value="">Select a service</option>
+                                <option value="residential">Residential Design</option>
+                                <option value="commercial">Commercial Spaces</option>
+                                <option value="furniture">Furniture & Decor</option>
+                                <option value="lighting">Lighting Design</option>
+                                <option value="consultation">Design Consultation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Project Details</label>
+                            <textarea id="message" name="message" placeholder="Share your vision for your project..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Luxe Interiors</h3>
+                    <p>Redefining spaces with innovative, luxurious designs tailored to your vision.</p>
+                    <div class="social-links">
+                        <a href="#">📘</a>
+                        <a href="#">📷</a>
+                        <a href="#">🐦</a>
+                        <a href="#">💼</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <p><a href="#services">Residential Design</a></p>
+                    <p><a href="#services">Commercial Spaces</a></p>
+                    <p><a href="#services">Furniture & Decor</a></p>
+                    <p><a href="#services">Lighting Design</a></p>
+                    <p><a href="#services">Color Consultation</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <p><a href="#portfolio">Portfolio</a></p>
+                    <p><a href="#testimonials">Testimonials</a></p>
+                    <p><a href="#contact">Contact Us</a></p>
+                    <p><a href="#">About Us</a></p>
+                    <p><a href="#">Careers</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <p><a href="#">Design Blog</a></p>
+                    <p><a href="#">Style Guide</a></p>
+                    <p><a href="#">Free Consultation</a></p>
+                    <p><a href="#">Design Tips</a></p>
+                    <p><a href="#">Project Gallery</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Luxe Interiors. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page loading
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                animateHero();
+            }, 1200);
+        });
+
+        // Hero animations
+        function animateHero() {
+            const heroTitle = document.querySelector('.hero h1');
+            const heroText = document.querySelector('.hero p');
+            const heroButtons = document.querySelector('.cta-buttons');
+            const heroOverlay = document.querySelector('.hero-overlay');
+
+            gsap.to(heroTitle, {
+                opacity: 1,
+                y: 0,
+                duration: 1.4,
+                ease: "power4.out"
+            });
+
+            gsap.to(heroText, {
+                opacity: 1,
+                y: 0,
+                duration: 1.4,
+                delay: 0.3,
+                ease: "power4.out"
+            });
+
+            gsap.to(heroButtons, {
+                opacity: 1,
+                y: 0,
+                duration: 1.4,
+                delay: 0.6,
+                ease: "power4.out"
+            });
+
+            gsap.to(heroOverlay, {
+                opacity: 0.5,
+                duration: 2,
+                delay: 1,
+                ease: "power2.inOut",
+                repeat: -1,
+                yoyo: true
+            });
+
+            // Floating particles
+            createFloatingParticles();
+        }
+
+        // Create floating particles
+        function createFloatingParticles() {
+            const hero = document.querySelector('.hero');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                hero.appendChild(particle);
+
+                gsap.to(particle, {
+                    y: -150,
+                    x: Math.random() * 300 - 150,
+                    duration: Math.random() * 10 + 5,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "power1.inOut"
+                });
+            }
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            gsap.to(navLinks, {
+                opacity: navLinks.classList.contains('active') ? 1 : 0,
+                y: navLinks.classList.contains('active') ? 0 : 20,
+                duration: 0.5,
+                ease: "power3.out"
+            });
+        });
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const count = parseInt(counter.innerText);
+                const speed = target / 200;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + speed);
+                    setTimeout(() => animateCounters(), 10);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -80px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('stats')) {
+                        animateCounters();
+                    }
+                    
+                    // Animate service cards
+                    if (entry.target.classList.contains('service-card')) {
+                        gsap.from(entry.target, {
+                            opacity: 0,
+                            y: 80,
+                            duration: 1.2,
+                            ease: "power4.out"
+                        });
+                    }
+
+                    // Animate portfolio items
+                    if (entry.target.classList.contains('portfolio-item')) {
+                        gsap.from(entry.target, {
+                            opacity: 0,
+                            scale: 0.9,
+                            duration: 1,
+                            ease: "power4.out"
+                        });
+                    }
+
+                    // Animate contact items
+                    if (entry.target.classList.contains('contact-item')) {
+                        gsap.from(entry.target, {
+                            opacity: 0,
+                            x: -50,
+                            duration: 1,
+                            ease: "power4.out"
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.stats, .service-card, .portfolio-item, .contact-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Testimonial slider
+        let currentTestimonialIndex = 1;
+        const testimonials = document.querySelectorAll('.testimonial');
+        const dots = document.querySelectorAll('.slider-dot');
+
+        function showTestimonial(index) {
+            testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            testimonials[index - 1].classList.add('active');
+            dots[index - 1].classList.add('active');
+            
+            gsap.fromTo(testimonials[index - 1], {
+                opacity: 0,
+                x: 70
+            }, {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+
+            currentTestimonialIndex = index;
+        }
+
+        function currentTestimonial(index) {
+            showTestimonial(index);
+        }
+
+        // Auto-rotate testimonials
+        setInterval(() => {
+            currentTestimonialIndex = currentTestimonialIndex >= testimonials.length ? 1 : currentTestimonialIndex + 1;
+            showTestimonial(currentTestimonialIndex);
+        }, 5000);
+
+        // Portfolio item interactions
+        function openPortfolio(projectName) {
+            alert(`Exploring ${projectName}. This would open a detailed project gallery in a full implementation.`);
+        }
+
+        // Contact form handling
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const service = formData.get('service');
+            const message = formData.get('message');
+
+            if (!name || !email || !message) {
+                alert('Please complete all required fields.');
+                return;
+            }
+
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+
+            gsap.to(submitButton, {
+                opacity: 0.7,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+
+            setTimeout(() => {
+                alert('Your message has been sent! We’ll respond within 24 hours.');
+                this.reset();
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                gsap.to(submitButton, {
+                    opacity: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            }, 2000);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Button hover effects
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                gsap.to(this, {
+                    scale: 1.1,
+                    duration: 0.4,
+                    ease: "power3.out"
+                });
+            });
+
+            button.addEventListener('mouseleave', function() {
+                gsap.to(this, {
+                    scale: 1,
+                    duration: 0.4,
+                    ease: "power3.out"
+                });
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // Typing effect for hero title
+        function typeWriter(element, text, speed = 80) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function typing() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                }
+            }
+            typing();
+        }
+
+        setTimeout(() => {
+            const heroTitle = document.querySelector('.hero h1');
+            if (heroTitle) {
+                const originalText = heroTitle.textContent;
+                typeWriter(heroTitle, originalText, 70);
+            }
+        }, 1800);
+
+        // Enhanced service card tilt effect
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mousemove', function(e) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 15;
+                const rotateY = (centerX - x) / 15;
+                
+                gsap.to(card, {
+                    transform: `perspective(1400px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(15px)`,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                gsap.to(card, {
+                    transform: 'perspective(1400px) rotateX(0) rotateY(0) translateZ(0)',
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+        });
+
+        // Scroll progress indicator
+        const progressBar = document.createElement('div');
+        progressBar.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 5px;
+            background: linear-gradient(90deg, #f7cac9, #f3a7a4);
+            z-index: 10000;
+            transition: width 0.3s ease;
+        `;
+        document.body.appendChild(progressBar);
+
+        window.addEventListener('scroll', function() {
+            const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            progressBar.style.width = scrollPercent + '%';
+        });
+
+        // Portfolio item hover effect
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                gsap.to(this, {
+                    scale: 1.05,
+                    duration: 0.4,
+                    ease: "power3.out"
+                });
+            });
+
+            item.addEventListener('mouseleave', function() {
+                gsap.to(this, {
+                    scale: 1,
+                    duration: 0.4,
+                    ease: "power3.out"
+                });
+            });
+        });
+    </script>
+</body>
+</html>
