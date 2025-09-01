@@ -30,10 +30,10 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="./views/about-us.html">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Our Services</a>
+                        <a class="nav-link" href="./views/service.html">Our Services</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Portfolio</a>
@@ -54,7 +54,7 @@
         <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" class="d-block w-100" alt="Modern Living Room">
+                    <img src="https://images.unsplash.com/photo-1604328702728-d26d2062c20b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="Office interior">
                 </div>
                 <div class="carousel-item">
                     <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6" class="d-block w-100" alt="Luxury Bedroom">
@@ -278,30 +278,39 @@
     </section> -->
 
     <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
+<section class="testimonials" id="testimonials">
         <div class="container">
-            <div class="section-title">
-                <h2 style="color: #f4f0e8;">Client Stories</h2>
-                <p style="color: #ccc;">Hear from our delighted clients about their transformative experiences.</p>
+            <div class="section-header d-flex justify-content-between align-items-start">
+                <div class="title">
+                    <h2 style="color: #f4f0e8;">Client Stories</h2>
+                    <p style="color: #ccc;">Hear from our delighted clients about their transformative experiences.</p>
+                </div>
+                <div class="arrows d-flex">
+                    <button onclick="prevTestimonial()">&lt;</button>
+                    <button onclick="nextTestimonial()">&gt;</button>
+                </div>
             </div>
             <div class="testimonial-slider">
-                <div class="testimonial active">
-                    <p>"Luxe Interiors turned our office into a masterpiece. Their creativity and precision inspire our team daily."</p>
+                <div class="testimonial">
+                    <p>Luxe Interiors turned our office into a masterpiece. Their creativity and precision inspire our team daily.</p>
                     <div class="testimonial-author">- Sarah Johnson, CEO TechCorp</div>
                 </div>
                 <div class="testimonial">
-                    <p>"From vision to reality, Luxe Interiors delivered our dream home with unmatched professionalism."</p>
+                    <p>From vision to reality, Luxe Interiors delivered our dream home with unmatched professionalism.</p>
                     <div class="testimonial-author">- Michael & Lisa Chen, Homeowners</div>
                 </div>
                 <div class="testimonial">
-                    <p>"Their innovative restaurant design elevated our dining experience, delighting our customers."</p>
+                    <p>Their innovative restaurant design elevated our dining experience, delighting our customers.</p>
                     <div class="testimonial-author">- Giovanni Romano, Restaurant Owner</div>
                 </div>
-            </div>
-            <div class="slider-nav">
-                <div class="slider-dot active" onclick="currentTestimonial(1)"></div>
-                <div class="slider-dot" onclick="currentTestimonial(2)"></div>
-                <div class="slider-dot" onclick="currentTestimonial(3)"></div>
+                <div class="testimonial">
+                    <p>Luxe Interiors transformed our outdated kitchen into a modern marvel. Highly recommended!</p>
+                    <div class="testimonial-author">- Emily Davis, Homeowner</div>
+                </div>
+                <div class="testimonial">
+                    <p>Their attention to detail in our corporate headquarters design was impeccable.</p>
+                    <div class="testimonial-author">- David Lee, CFO FinanceInc</div>
+                </div>
             </div>
         </div>
     </section>
@@ -422,7 +431,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Luxe Interiors. All rights reserved. | Privacy Policy | Terms of Service</p>
+                <p>&copy; 2025 Luxence Interiors. All rights reserved. | Privacy Policy | Terms of Service</p>
             </div>
         </div>
     </footer>
