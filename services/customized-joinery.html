@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joinery & upholstery - Luxence Interiors</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <style>
+        body {
+            /* font-family: Arial, sans-serif; */
+            margin: 0;
+            padding: 0;
+        }
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            margin: 3rem;
+            background: #f1f3f5;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .image-container {
+            position: absolute;
+            right: 3rem;
+            width: 70%; /* Roughly 75% of usable section width after margins/padding */
+            z-index: 1;
+            padding: 1.5rem;
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .text-container {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 3rem;
+            width: 40%;
+            margin-left: -60%; /* Slight overlap with image for foreground effect */
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .text-container h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+        .text-container p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #333;
+        }
+        @media (max-width: 768px) {
+            .hero-section {
+                margin: 1.5rem;
+                padding: 1.5rem;
+                flex-direction: column; /* Stack vertically */
+                min-height: auto;
+            }
+            .image-container {
+                position: static; /* Remove absolute positioning for stacking */
+                width: 100%;
+                padding: 1rem;
+                margin-bottom: 1rem; /* Space between image and text */
+            }
+            .text-container {
+                position: static; /* Remove absolute positioning for stacking */
+                width: 100%;
+                margin: 0;
+                padding: 2rem;
+                text-align: center;
+            }
+            .text-container h1 {
+                font-size: 2rem;
+            }
+            .text-container p {
+                font-size: 1.2rem;
+            }
+        }
+
+        .form-section {
+            padding: 80px 0;
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6') no-repeat center center;
+            background-size: cover;
+        }
+        .form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
+            z-index: 1;
+        }
+        .ccontact-form {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .ccontact-form h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            position: relative;
+            flex: 1;
+            min-width: 200px;
+        }
+        .form-group.full-width {
+            flex: 0 0 100%;
+            max-width: 600px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 0;
+            border: none;
+            border-bottom: 2px solid #fff;
+            background: transparent;
+            font-size: 1.1rem;
+            color: #fff;
+            transition: border-color 0.3s ease;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .form-group label {
+            position: absolute;
+            top: 12px;
+            left: 0;
+            font-size: 1.1rem;
+            color: #ccc;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-bottom-color: #d4a017;
+        }
+        .form-group input:focus + label,
+        .form-group textarea:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group textarea:not(:placeholder-shown) + label {
+            top: -20px;
+            font-size: 0.9rem;
+            color: #d4a017;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: transparent;
+        }
+        .ccontact-form button {
+            background: #d4a017;
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #fff;
+            width: 200px;
+            margin: 30px 0 0;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .ccontact-form button:hover {
+            background: #b88c14;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 767.98px) {
+            .contact-form h3 {
+                font-size: 2rem;
+                text-align: center;
+            }
+            .form-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .form-group {
+                min-width: 100%;
+            }
+            .form-group.full-width {
+                max-width: 100%;
+            }
+            .contact-form button {
+                width: 100%;
+            }
+        }
+        @media (min-width: 768px) {
+            .form-row {
+                justify-content: flex-start;
+            }
+            .contact-form {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg" id="navbar">
+        <div class="container-fluid" style="max-width: 1400px;">
+            <a class="navbar-brand" href="/"><img src="../assets/images/Logo11.png" alt="Interior Design Logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./about-us.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Our Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./contact-us.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<!-- Hero Section -->
+    <section class="hero" id="home">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1604328702728-d26d2062c20b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="Office interior">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6" class="d-block w-100" alt="Luxury Bedroom">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1600585152915-d208bec867a1" class="d-block w-100" alt="Modern Kitchen">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d" class="d-block w-100" alt="Cozy Dining Area">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36" class="d-block w-100" alt="Stylish Office">
+                </div>
+            </div>
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+            </div>
+            <!-- <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button> -->
+        </div>
+        <div class="slide-content">
+            <h1>Elevate Your Space</h1>
+            <p>Crafting luxurious, functional living rooms.</p>
+            <a href="#portfolio" class="btn">Discover Our Work</a>
+        </div>
+    </section>
+
+    <!-- Service 1 -->
+    <section class="hero-section">
+        <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36" alt="Joinery & upholstery">
+        </div>
+        <div class="text-container">
+            <h1>Joinery & upholstery</h1>
+            <p>
+                Our Joinery facilities specialize in contemporary design and woodwork, seamlessly integrating advanced technology with superior craftsmanship to deliver outstanding projects. We craft bespoke Upholstery services suited for every project. Rooted in precision and artistry, our approach combines modern techniques with traditional handcrafting skills, all executed by a team of highly skilled artisans. Whether it’s a large-scale project or the smallest bespoke detail, we approach each project with a commitment to perfection. Located in Dubai Investment Park, our 100,000 sq. ft. joinery and upholstery facility enables us to create custom solutions that are tailored to the specific requirements of every project. With a focus on quality workmanship and meticulous attention to detail, we ensure that each piece meets the highest standards of excellence.        </div>
+    </section>
+
+    <!-- Client says -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header d-flex justify-content-between align-items-start">
+                <div class="title">
+                    <h2 style="color: #f4f0e8;">Client Stories</h2>
+                    <p style="color: #ccc;">Hear from our delighted clients about their transformative experiences.</p>
+                </div>
+                <div class="arrows d-flex">
+                    <button onclick="prevTestimonial()">&lt;</button>
+                    <button onclick="nextTestimonial()">&gt;</button>
+                </div>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <p>Luxe Interiors turned our office into a masterpiece. Their creativity and precision inspire our team daily.</p>
+                    <div class="testimonial-author">- Sarah Johnson, CEO TechCorp</div>
+                </div>
+                <div class="testimonial">
+                    <p>From vision to reality, Luxe Interiors delivered our dream home with unmatched professionalism.</p>
+                    <div class="testimonial-author">- Michael & Lisa Chen, Homeowners</div>
+                </div>
+                <div class="testimonial">
+                    <p>Their innovative restaurant design elevated our dining experience, delighting our customers.</p>
+                    <div class="testimonial-author">- Giovanni Romano, Restaurant Owner</div>
+                </div>
+                <div class="testimonial">
+                    <p>Luxe Interiors transformed our outdated kitchen into a modern marvel. Highly recommended!</p>
+                    <div class="testimonial-author">- Emily Davis, Homeowner</div>
+                </div>
+                <div class="testimonial">
+                    <p>Their attention to detail in our corporate headquarters design was impeccable.</p>
+                    <div class="testimonial-author">- David Lee, CFO FinanceInc</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="form-section">
+        <div class="container">
+            <div class="ccontact-form">
+                <h3>Contact Us</h3>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="name" placeholder=" " required>
+                            <label for="name">Your Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder=" " required>
+                            <label for="email">Your Email</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="phone" placeholder=" " required>
+                            <label for="phone">Phone Number</label>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <input type="text" id="services" placeholder=" " required>
+                        <label for="services">Services</label>
+                    </div>
+                    <div class="form-group full-width">
+                        <input type="text" id="company" placeholder=" " required>
+                        <label for="company">Company Name</label>
+                    </div>
+                    <div class="form-group full-width">
+                        <textarea id="message" placeholder=" " required></textarea>
+                        <label for="message">Your Message</label>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+        <!-- Footer -->
+<footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Luxence Interiors</h3>
+                    <p>Redefining spaces with innovative, luxurious designs tailored to your vision.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <p><a href="#services">Residential Design</a></p>
+                    <p><a href="#services">Commercial Spaces</a></p>
+                    <p><a href="#services">Furniture & Decor</a></p>
+                    <p><a href="#services">Lighting Design</a></p>
+                    <p><a href="#services">Color Consultation</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <p><a href="#portfolio">Portfolio</a></p>
+                    <p><a href="#testimonials">Testimonials</a></p>
+                    <p><a href="#contact">Contact Us</a></p>
+                    <p><a href="#about">About Us</a></p>
+                    <p><a href="#careers">Careers</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Luxence Interiors. All rights reserved. | <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../scripts/script.js"></script>
+</body> 
+</html>
