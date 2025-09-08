@@ -213,6 +213,17 @@
             height: 100%;
         }
 
+        .carousel-item::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.288); /* Semi-transparent dark overlay */
+            z-index: 1; /* Ensure overlay is below slide content */    
+        }
+
         .carousel-item img {
             width: 100%;
             height: 100%;
@@ -911,35 +922,36 @@
 
         
         /* Portfolio Section */
-        /* .portfolio {
+        .portfolios {
             padding: 150px 0;
             background: linear-gradient(180deg, #f9f6f2, #f4f0e8);
         }
 
-        .portfolio-grid {
+        .portfolio-grids {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 2rem;
             margin-top: 100px;
         }
 
-        .portfolio-item {
+        .portfolio-items {
             position: relative;
             height: 360px;
             border-radius: 25px;
             overflow: hidden;
             cursor: pointer;
-            background: linear-gradient(45deg, #f4f0e8, #f9f6f2);
+            background-size: cover;
+            background-position: center;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
-        .portfolio-item:hover {
+        .portfolio-items:hover {
             transform: translateY(-10px);
             box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
         }
 
-        .portfolio-item::before {
+        .portfolio-items::before {
             content: '';
             position: absolute;
             top: 0;
@@ -949,13 +961,14 @@
             background: linear-gradient(135deg, rgba(247, 202, 201, 0.9), rgba(243, 167, 164, 0.9));
             opacity: 0;
             transition: opacity 0.4s ease;
+            z-index: 1;
         }
 
-        .portfolio-item:hover::before {
+        .portfolio-items:hover::before {
             opacity: 1;
         }
 
-        .portfolio-content {
+        .portfolio-contents {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -964,23 +977,24 @@
             color: #f4f0e8;
             transform: translateY(100%);
             transition: transform 0.4s ease;
+            z-index: 2;
         }
 
-        .portfolio-item:hover .portfolio-content {
+        .portfolio-items:hover .portfolio-content {
             transform: translateY(0);
         }
 
-        .portfolio-content h3 {
+        .portfolio-contents h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.7rem;
             margin-bottom: 0.8rem;
         }
 
-        .portfolio-content p {
+        .portfolio-contents p {
             font-size: 1.1rem;
             font-weight: 300;
             opacity: 0.9;
-        } */
+        }
 
         /* Testimonials */
         .testimonials {
