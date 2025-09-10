@@ -30,9 +30,9 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        .navbar-brand{
+        /* .navbar-brand{
             background: linear-gradient(90deg, #660b0b, #b91f1ff1);
-        }
+        } */
 
         .navbar-brand img {
             height: 150px;
