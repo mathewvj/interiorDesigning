@@ -76,7 +76,91 @@
             }
         }
 
-                .form-section {
+                /* Testimonials */
+        .testimonials {
+            background-color: #333; /* Dark background for contrast */
+            padding: 60px 0;
+        }
+        .section-header {
+            margin-bottom: 40px;
+        }
+        .testimonial-slider {
+            position: relative;
+            min-height: 300px; /* Increased height for better content fit */
+            overflow: hidden;
+        }
+        .testimonial {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 350px;
+            max-width: 80%;
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            opacity: 0;
+        }
+        .testimonial p {
+            color: #ddd;
+            font-style: italic;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .testimonial p::before {
+            content: '“';
+            font-size: 40px;
+            color: #f4f0e8;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+        }
+        .testimonial p::after {
+            content: '”';
+            font-size: 40px;
+            color: #f4f0e8;
+            position: absolute;
+            bottom: -40px;
+            right: -10px;
+        }
+        .testimonial-author {
+            color: #f4f0e8;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .arrows button {
+            background: transparent;
+            border: none;
+            color: #f4f0e8;
+            font-size: 32px;
+            cursor: pointer;
+            padding: 0 15px;
+            transition: color 0.3s;
+        }
+        .arrows button:hover {
+            color: #ffffff;
+        }
+        @media (max-width: 768px) {
+            .testimonial {
+                width: 90%;
+                padding: 20px;
+            }
+            .arrows button {
+                font-size: 24px;
+            }
+            .section-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .arrows {
+                margin-top: 15px;
+            }
+        }
+
+        .form-section {
             padding: 80px 0;
             position: relative;
             background: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6') no-repeat center center;

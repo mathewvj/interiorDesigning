@@ -91,7 +91,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(26, 26, 26, 0.699);
             color: #fff;
             display: flex;
             flex-direction: column;
@@ -253,7 +253,7 @@
 
     <!-- About Section -->
     <section class="about-section">
-        <div class="container">
+        <div class="container counter-section">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-12 about-left">
                     <h2>About Luxence Interiors</h2>
@@ -263,19 +263,19 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="stats-box">
-                                <h3>10+</h3>
+                                <h3 class="counter" data-target="15">0</h3>
                                 <p>Years of Experience</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="stats-box">
-                                <h3>500+</h3>
+                                <h3 class="counter" data-target="250">0</h3>
                                 <p>Completed Projects</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="stats-box">
-                                <h3>50+</h3>
+                                <h3 class="counter" data-target="40">0</h3>
                                 <p>Dedicated Team Members</p>
                             </div>
                         </div>
@@ -291,7 +291,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12 mb-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1618221195710-dd2b64384711?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400" class="card-img" alt="Vision Image">
+                        <img src="../assets/aboutus/our vision.jpg" class="card-img" alt="Vision Image">
                         <div class="card-text-overlay">Our Vision</div>
                         <div class="card-overlay">
                             <h3>Our Vision</h3>
@@ -303,7 +303,7 @@
                 </div>
                 <div class="col-lg-6 col-md-12 mb-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400" class="card-img" alt="Mission Image">
+                        <img src="../assets/aboutus/our mission.jpg" class="card-img" alt="Mission Image">
                         <div class="card-text-overlay">Our Mission</div>
                         <div class="card-overlay">
                             <h3>Our Mission</h3>
@@ -323,27 +323,27 @@
             <h2 class="text-center mb-5">Our Values</h2>
             <div class="row g-3">
                 <div class="col-lg-2 col-md-6 col-12 value-item">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=180" alt="Respect">
+                    <img src="../assets/aboutus/respect.jpg" alt="Respect">
                     <h4>Respect</h4>
                     <p>Valuing differences and contributions from all.</p>
                 </div>
                 <div class="col-lg-2 col-md-6 col-12 value-item">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=180" alt="Safety">
+                    <img src="../assets/aboutus/safety.jpg" alt="Safety">
                     <h4>Safety</h4>
                     <p>Prioritizing safety for everyone involved.</p>
                 </div>
                 <div class="col-lg-2 col-md-6 col-12 value-item">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=180" alt="Collaboration">
+                    <img src="../assets/aboutus/collaboration.jpg" alt="Collaboration">
                     <h4>Collaboration</h4>
                     <p>Working together to build strong relationships and partnerships.</p>
                 </div>
                 <div class="col-lg-2 col-md-6 col-12 value-item">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=180" alt="Commitment">
+                    <img src="../assets/aboutus/commitment.jpg" alt="Commitment">
                     <h4>Commitment</h4>
                     <p>Proactively finding the best design solutions.</p>
                 </div>
                 <div class="col-lg-2 col-md-6 col-12 value-item">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=180" alt="Excellence">
+                    <img src="../assets/aboutus/exellence.jpg" alt="Excellence">
                     <h4>Excellence</h4>
                     <p>Striving for flawless customer experience and solutions.</p>
                 </div>
@@ -391,6 +391,7 @@
 
 
      <script src="../scripts/script.js" defer></script>
+     <script src="../scripts/counter.js" defer></script>
      <!-- Bootstrap JS (Required for Carousel) -->
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
